@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ViagemOnboardingPage.Views.ViagemPage"
+             xmlns:viewmodels="clr-namespace:ViagemOnboardingPage.ViewModels"
+             xmlns:models="clr-namespace:ViagemOnboardingPage.Models"
+             x:DataType="viewmodels:ViagemOnboardingViewModel"
+             BackgroundColor="#FFF"
+             Shell.NavBarIsVisible="False"
+             Title="ViagemOnboardingPage">
+
+    <Grid RowDefinitions="*, Auto, Auto" 
+      Padding="24,30,24,30" 
+      RowSpacing="20">
+
+
+        <CarouselView Grid.Row="0"
+                  IndicatorView="Indicador"
+                  Position="{Binding Posicao}"
+                  Loop="False"
+                  ItemsSource="{Binding Itens}">
+
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="models:OnboardingItem">
+                    <Grid RowDefinitions="*, Auto, Auto" RowSpacing="15">
+
+
+                        <Image Grid.Row="0"
+                           Source="{Binding ImagemUrl}"
+                           Aspect="AspectFit"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+
+
+                        <Label Grid.Row="1"
+                           Text="{Binding Titulo}"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           TextColor="Black"
+                           HorizontalTextAlignment="Center"
+                           LineBreakMode="WordWrap" />
+
+
+                        <Label Grid.Row="2"
+                           Text="{Binding Descricao}"
+                           FontSize="15"
+                           TextColor="#333333"
+                           HorizontalTextAlignment="Center"
+                           Padding="10,0" />
+                    </Grid>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+
+        <IndicatorView x:Name="Indicador"
+                   Grid.Row="1"
+                   HorizontalOptions="Center"
+                   IndicatorColor="#FFE2E9"
+                   SelectedIndicatorColor="#FF2A6D"
+                   IndicatorSize="10"
+                   Margin="0,10" />
+
+
+        <Grid Grid.Row="2"
+          ColumnDefinitions="*,*"
+          ColumnSpacing="15">
+
+
+            <Button Grid.Column="0"
+                Text="Get started"
+                BackgroundColor="#FF2A6D"
+                TextColor="White"
+                CornerRadius="14"
+                HeightRequest="52"
+                FontSize="16" />
+
+            <Button Grid.Column="1"
+                Text="Next"
+                Command="{Binding ProximoCommand}"
+                BackgroundColor="#42AA2B"
+                TextColor="White"
+                CornerRadius="14"
+                HeightRequest="52"
+                FontSize="16"
+                IsVisible="{Binding ExibirBotao}" />
+        </Grid>
+    </Grid>
+</ContentPage>
